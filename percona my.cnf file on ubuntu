@@ -1,0 +1,44 @@
+[mysqld]
+server-id=1
+datadir=/var/lib/mysql
+# Path to Galera library
+wsrep_provider=/usr/lib/libgalera_smm.so
+
+
+auto_increment_increment=1
+max_allowed_packet=16M
+innodb_buffer_pool_size=12G
+query-cache-type=1
+query_cache_limit=4M
+query_cache_size=64M
+join_buffer_size=2M
+table_open_cache=2500
+bind-address=0.0.0.0
+
+
+# Cluster connection URL contains the IPs of node#1, node#2 and node#3
+wsrep_cluster_address=gcomm://10.65.30.80,10.65.31.26
+
+# In order for Galera to work correctly binlog format should be ROW
+binlog_format=ROW
+
+# MyISAM storage engine has only experimental support
+default_storage_engine=InnoDB
+
+# This InnoDB autoincrement locking mode is a requirement for Galera
+innodb_autoinc_lock_mode=2
+
+# Node #1 address
+wsrep_node_address=10.65.30.80
+wsrep_node_name=percona1
+# SST method
+wsrep_sst_method=xtrabackup-v2
+
+#pxc_strict_mode allowed values: DISABLED,PERMISSIVE,ENFORCING,MASTER
+pxc_strict_mode=DISABLED
+
+# Cluster name
+wsrep_cluster_name=my_ubuntu_cluster
+
+# Authentication for SST method
+wsrep_sst_auth="sstuser:kVL4P8wyY6WqvXTSJra1"

@@ -1,0 +1,6 @@
+cloudfront    in for clear cache of lazarus after asg refresh
+and put in invalidate /*
+
+redis-cli
+flushdb
+flushall
